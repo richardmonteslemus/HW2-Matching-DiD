@@ -1,0 +1,1599 @@
+% Options for packages loaded elsewhere
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+%
+\documentclass[
+  letterpaper,
+  DIV=11,
+  numbers=noendperiod]{scrartcl}
+\usepackage{xcolor}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+% Make \paragraph and \subparagraph free-standing
+\makeatletter
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}{
+    \@ifstar
+      \xxxParagraphStar
+      \xxxParagraphNoStar
+  }
+  \newcommand{\xxxParagraphStar}[1]{\oldparagraph*{#1}\mbox{}}
+  \newcommand{\xxxParagraphNoStar}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}{
+    \@ifstar
+      \xxxSubParagraphStar
+      \xxxSubParagraphNoStar
+  }
+  \newcommand{\xxxSubParagraphStar}[1]{\oldsubparagraph*{#1}\mbox{}}
+  \newcommand{\xxxSubParagraphNoStar}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+\makeatother
+
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{241,243,245}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.40,0.45,0.13}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\BuiltInTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\ExtensionTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.28,0.35,0.67}{#1}}
+\newcommand{\ImportTok}[1]{\textcolor[rgb]{0.00,0.46,0.62}{#1}}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.07,0.07,0.07}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+
+
+
+
+
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+
+
+ 
+
+
+\usepackage{booktabs}
+\usepackage{caption}
+\usepackage{longtable}
+\usepackage{colortbl}
+\usepackage{array}
+\usepackage{anyfontsize}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+\usepackage{threeparttablex}
+\usepackage[normalem]{ulem}
+\usepackage{makecell}
+\usepackage{xcolor}
+\KOMAoption{captions}{tableheading}
+\makeatletter
+\@ifpackageloaded{tcolorbox}{}{\usepackage[skins,breakable]{tcolorbox}}
+\@ifpackageloaded{fontawesome5}{}{\usepackage{fontawesome5}}
+\definecolor{quarto-callout-color}{HTML}{909090}
+\definecolor{quarto-callout-note-color}{HTML}{0758E5}
+\definecolor{quarto-callout-important-color}{HTML}{CC1914}
+\definecolor{quarto-callout-warning-color}{HTML}{EB9113}
+\definecolor{quarto-callout-tip-color}{HTML}{00A047}
+\definecolor{quarto-callout-caution-color}{HTML}{FC5300}
+\definecolor{quarto-callout-color-frame}{HTML}{acacac}
+\definecolor{quarto-callout-note-color-frame}{HTML}{4582ec}
+\definecolor{quarto-callout-important-color-frame}{HTML}{d9534f}
+\definecolor{quarto-callout-warning-color-frame}{HTML}{f0ad4e}
+\definecolor{quarto-callout-tip-color-frame}{HTML}{02b875}
+\definecolor{quarto-callout-caution-color-frame}{HTML}{fd7e14}
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\ifdefined\contentsname
+  \renewcommand*\contentsname{Table of contents}
+\else
+  \newcommand\contentsname{Table of contents}
+\fi
+\ifdefined\listfigurename
+  \renewcommand*\listfigurename{List of Figures}
+\else
+  \newcommand\listfigurename{List of Figures}
+\fi
+\ifdefined\listtablename
+  \renewcommand*\listtablename{List of Tables}
+\else
+  \newcommand\listtablename{List of Tables}
+\fi
+\ifdefined\figurename
+  \renewcommand*\figurename{Figure}
+\else
+  \newcommand\figurename{Figure}
+\fi
+\ifdefined\tablename
+  \renewcommand*\tablename{Table}
+\else
+  \newcommand\tablename{Table}
+\fi
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Listing}
+\newcommand*\listoflistings{\listof{codelisting}{List of Listings}}
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
+\makeatother
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={🌬️🗳 Assignment 2: Wind Turbines, Matching, and Difference-in-Differences},
+  pdfauthor={EDS 241 / ESM 244 (DUE: 2/4/26)},
+  colorlinks=true,
+  linkcolor={blue},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={Blue},
+  pdfcreator={LaTeX via pandoc}}
+
+
+\title{🌬️🗳 Assignment 2: Wind Turbines, Matching, and
+Difference-in-Differences}
+\usepackage{etoolbox}
+\makeatletter
+\providecommand{\subtitle}[1]{% add subtitle to \maketitle
+  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
+}
+\makeatother
+\subtitle{Replicate causal inference identification strategies in Stokes
+(2015)}
+\author{EDS 241 / ESM 244 (DUE: 2/4/26)}
+\date{2026-01-26}
+\begin{document}
+\maketitle
+
+
+\subsubsection{Assignment instructions}\label{assignment-instructions}
+
+Working with classmates to troubleshoot code and concepts is encouraged.
+If you collaborate, list collaborators at the top of your submission.
+
+All written responses must be written independently (in your own words).
+
+Keep your work readable: Use clear headings and label plot elements
+thoughtfully.
+
+Assignment submission (YOUR NAME):
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{Introduction}\label{introduction}
+
+In this assignment you will be doing political weather forecasting
+except the ``storms'' we care about are electoral swings that might
+follow local wind turbine development.
+
+In Stokes (2015), the idea is that a policy with diffuse benefits
+(cleaner electricity) can create concentrated local costs (turbines
+nearby), and those local opponents may ``send a signal'' at the ballot
+box (i.e., NIMBYISM). Your job is to use two statistical tools:
+
+\begin{itemize}
+\tightlist
+\item
+  Matching: Can we create a more apples-to-apples comparison between
+  precincts that did vs.~did not end up near turbine proposals?
+\item
+  Fixed effects + Difference-in-Differences: Can we use repeated
+  elections to estimate how within-precinct changes in turbine exposure
+  relate to changes in incumbent vote share?
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{Learning goal: Replicate the matching and fixed effects
+analyses from
+study:}\label{learning-goal-replicate-the-matching-and-fixed-effects-analyses-from-study}
+
+\begin{quote}
+Stokes (2015): \emph{``Electoral Backlash against Climate Policy: A
+Natural Experiment on Retrospective Voting and Local Resistance to
+Public Policy}.
+\end{quote}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Study:}
+  \href{https://drive.google.com/file/d/1y2Okzjq2EA43AW5JzCvFS8ecLpeP6NKh/view?usp=sharing}{Stokes
+  (2015) - Article}
+\item
+  \textbf{Data source:}
+  \href{https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/SDUGCC}{Dataverse-Stokes2015}
+\end{itemize}
+
+\begin{tcolorbox}[enhanced jigsaw, colback=white, breakable, rightrule=.15mm, leftrule=.75mm, colframe=quarto-callout-color-frame, opacityback=0, arc=.35mm, bottomrule=.15mm, toprule=.15mm, left=2mm]
+
+\texttt{NOTE:} Replication of study estimates will be approximate. An
+alternative matching procedure and fixed effects estimation package are
+utilized in this assignment for illustration purposes.
+
+\end{tcolorbox}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{Setup: Load libraries}\label{setup-load-libraries}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{-1}
+\tightlist
+\item
+  Load libraries (+ install if needed)
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\FunctionTok{library}\NormalTok{(here)}
+\FunctionTok{library}\NormalTok{(janitor)}
+\FunctionTok{library}\NormalTok{(jtools)}
+
+\FunctionTok{library}\NormalTok{(gtsummary)}
+\FunctionTok{library}\NormalTok{(gt)}
+
+\FunctionTok{library}\NormalTok{(MatchIt) }\CommentTok{\# matching}
+\FunctionTok{library}\NormalTok{(cobalt)  }\CommentTok{\# balance + love plots}
+
+\FunctionTok{library}\NormalTok{(fixest) }\CommentTok{\# fast fixed effects}
+\FunctionTok{library}\NormalTok{(scales) }\CommentTok{\# plotting}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{Part 1: Study Background}\label{part-1-study-background}
+
+\paragraph{\texorpdfstring{\textbf{1A.} Dive into the details of the
+study design and evaluation
+plan}{1A. Dive into the details of the study design and evaluation plan}}\label{a.-dive-into-the-details-of-the-study-design-and-evaluation-plan}
+
+\begin{quote}
+Goal: Get familiar with the study setting, environmental issue, and
+policy under evaluation.
+\end{quote}
+
+\begin{tcolorbox}[enhanced jigsaw, colback=white, breakable, rightrule=.15mm, leftrule=.75mm, colframe=quarto-callout-color-frame, opacityback=0, arc=.35mm, bottomrule=.15mm, toprule=.15mm, left=2mm]
+
+\texttt{NOTE:} Read over study to inform your response to the assignment
+questions. For this assignment we will skip-over sections that describe
+the \emph{Instrumental Variables} identification strategy. We will cover
+instrumental variable designs weeks 6-7.
+
+\end{tcolorbox}
+
+\textbf{1A.Q1} Summarize the environmental policy issue, the outcome of
+interest, and the intervention being evaluated. Be sure to include a
+brief description of each of the following key elements of the study:
+unit of analysis, outcome, treatment, comparison group):
+
+\emph{Response:} \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+Environmental Policy Issue:
+
+In 2009, the Liberal government in Ontario Canada passed the Green
+Energy Act. This allows private corportations to build clean wind energy
+infrastructure without needing approval from local communities. Although
+a majority of people in Ontario supported clean energy, there were
+concentrated costs for local communities close to these projects. These
+communities sent a signal of disapproval by causing the Liberal
+government to lose seats at the upcoming election. This caused the
+government to hold back from building these projects.
+
+Outcome of Interest:
+
+The outcome of interest is Liberal party vote share in provincial
+elections.
+
+Intervention Being Evaluated:
+
+The intervention being evaluated is placing or proposing wind turbine
+projects in or near precincts.
+
+Unit of Analysis:
+
+Electoral precincts in the Ontario
+
+Outcome treatment:
+
+Precincts with proposed or built wind turbines.
+
+Comparison group:
+
+Precincts without proposed or built wind turbines
+
+\textbf{1A.Q2} Why might turbine proposals be correlated with baseline
+political preferences or rural areas? Provide 2 plausible mechanisms,
+and explain why that creates confounding.
+
+\emph{Response:} \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+Since wind turbines could only be built in rural areas this causes a
+confound. People who live in rural areas tend to be more conservative
+and already plan to vote against policies commonly associated with
+liberal parties. Therefore, loss of liberal party voter share may be due
+to prexisting trends in these rural areas that were already becoming
+more anti-liberal in the first place. This decline is liberal votes may
+be wrongly attributed to the wind turbine project when its actually a
+pre-existing political ideology trend.
+
+Another confound would be that when wealthy developers were thinking
+about where to place these wind turbines, they purposely avoided wealthy
+and politically active communities. They might have anticipated these
+communities would protest and slow down the development project and
+decided to instead chose lower income and less politically active
+communities. This may mean the disapproval expressed through voting
+against the Liberal Party might not be caused by the turbines
+themselves, but rather reflects pre-existing characteristics of
+communities that got turbines.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{\texorpdfstring{\textbf{1B.} Break down the causal inference
+strategy and identify threats to
+identification:}{1B. Break down the causal inference strategy and identify threats to identification:}}\label{b.-break-down-the-causal-inference-strategy-and-identify-threats-to-identification}
+
+\textbf{1B.Q1} What is the key identifying assumption for a fixed
+effects / Difference-in-Difference design? Explain how this assumption
+when satisfied provides evidence of causal effect:
+
+\emph{Response:} \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+The key identifying assumption is that in the absence of treatment, the
+treated and control group would have experienced parallel trends over
+time. If both groups experienced the same trend in the absence of
+treatment, this indicated the treatment is responsible for the change in
+slope for the treated group and provides evidence of causal effect if
+the slope change is significant.
+
+\textbf{1B.Q2} What is the reason for using a fixed effects approach
+from a causal inference perspective? Summarize within the context of
+study (in your own words).
+
+\emph{Response:} \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+With a fixed effects approach we compare each precinct directly to
+itself over time and observe changes that same precinct experiences over
+time. This allows us to control for time-invariant differences that are
+bound to exists between different precincts in our study.
+
+\textbf{1B.Q3} What part of the SUTVA assumption is most likely violated
+in the context of this study design (and why)?
+
+\emph{Response:} \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+The SUTVA assumption requiring one unit's treatment to not affect the
+outcome of another unit is being violated. When a turbine is placed in
+one precinct it doesn't necessarily only affect that specific precinct.
+The fossil fuel job displacement caused by a wind turbine may affect
+many surrounding precinct workers since they are most likely spread out
+across various precincts. Furthermore, the mobilization efforts against
+wind turbines might not be contained to the precincts containing wind
+turbines, they may inspire allies from other precincts without wind
+turbines to vote in their favor.
+
+\textbf{1B.Q4} Why does spillover matter when estimating an unbiased
+treatment effect?
+
+\emph{Response:} \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+Spillover could cause the difference between between control and treated
+groups to seem smaller than they really are. This is because the control
+group could potentially vote similarly to the treatment group due to it
+being influenced by the treatment group - this could introduce bias.
+
+\textbf{1B.Q5} How do the authors assess the risk of spillovers, and
+what analytic choice do they make to attempt to mitigate the risk that
+spillover biases the causal estimate?
+
+\emph{Response:} \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+The authors assess the risk of spillover by testing for the statistical
+significance of the treatment for precincts within a 1km, 2km, 3km, 4km,
+and 5km radius from a wind turbine. They see a statistically significant
+voter decline in precincts that are 0-3km from the wind turbine and
+choose to assign precincts within a 3km buffer from a wind turbine to
+the treated group as opposed to just assigning precincts containing wind
+turbines to the treated group.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{Part 2: Matching}\label{part-2-matching}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+We will start by evaluating the 2007 survey (cross-sectional) data.
+Treatment is defined by whether a precinct is near a turbine proposal
+(within 3 km).
+
+\begin{quote}
+Goal: Match precincts using pre-treatment covariates and then estimate
+the effect of proposed wind turbines on incumbent vote share.
+\end{quote}
+
+\paragraph{\texorpdfstring{\textbf{2A.} Load data for
+matching}{2A. Load data for matching}}\label{a.-load-data-for-matching}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Read in data file \texttt{stokes15\_survey2007.csv}
+\item
+  Code \texttt{precinct\_id} and \texttt{district\_id} as factors
+\item
+  Take a look at the data
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{match\_data }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\FunctionTok{here}\NormalTok{(}\StringTok{"data"}\NormalTok{, }\StringTok{"stokes15\_survey2007.csv"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} 
+    \FunctionTok{mutate}\NormalTok{(}\AttributeTok{precinct\_id =} \FunctionTok{as.factor}\NormalTok{(precinct\_id),}
+           \AttributeTok{district\_id =} \FunctionTok{as.factor}\NormalTok{(district\_id))}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{2A.Q1} Intuition check: \textbf{Why match?} Explain rationale
+for using this method.
+
+\emph{Response:} \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+We should match so that we make sure our treated precinct's counter
+factual is as similar as possible for pre-treatment variables. This
+makes sure we the difference we see between affected and unaffected
+precincts is due to the wind turbine and not some pre-existing
+differences in variables between them.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{\texorpdfstring{\textbf{2B.} Check imbalance (before
+matching)}{2B. Check imbalance (before matching)}}\label{b.-check-imbalance-before-matching}
+
+\begin{itemize}
+\tightlist
+\item
+  Create a covariate \emph{balance table} comparing treated and control
+  precincts
+\item
+  Treatment indicator: \texttt{proposed\_turbine\_3km}
+\item
+  Include pre-treatment covariates: \texttt{log\_home\_val\_07},
+  \texttt{p\_uni\_degree}, \texttt{log\_median\_inc},
+  \texttt{log\_pop\_denc}
+\item
+  Use the \texttt{tbl\_summary()} function from the
+  \texttt{\{gtsummary\}} package.
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{match\_data }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(}
+\NormalTok{    proposed\_turbine\_3km, }
+\NormalTok{    log\_home\_val\_07,}
+\NormalTok{    p\_uni\_degree,}
+\NormalTok{    log\_median\_inc,}
+\NormalTok{    log\_pop\_denc) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{tbl\_summary}\NormalTok{(}
+    \AttributeTok{by =}\NormalTok{ proposed\_turbine\_3km,}
+    \AttributeTok{statistic =} \FunctionTok{list}\NormalTok{(}
+      \FunctionTok{all\_continuous}\NormalTok{() }\SpecialCharTok{\textasciitilde{}} \StringTok{"\{mean\} (\{sd\})"}\NormalTok{,}
+      \FunctionTok{all\_categorical}\NormalTok{() }\SpecialCharTok{\textasciitilde{}} \StringTok{"\{n\} (\{p\}\%)"}
+\NormalTok{    )}
+\NormalTok{  ) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{modify\_header}\NormalTok{(label }\SpecialCharTok{\textasciitilde{}} \StringTok{"**Covariate**"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{modify\_spanning\_header}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\StringTok{"stat\_1"}\NormalTok{, }\StringTok{"stat\_2"}\NormalTok{) }\SpecialCharTok{\textasciitilde{}} \StringTok{"**Near Turbine**"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{table}
+\fontsize{12.0pt}{14.0pt}\selectfont
+\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}lcc}
+\toprule
+ & \multicolumn{2}{c}{\textbf{Near Turbine}} \\ 
+\cmidrule(lr){2-3}
+\textbf{Covariate} & \textbf{0}  N = 5,619\textsuperscript{\textit{1}} & \textbf{1}  N = 354\textsuperscript{\textit{1}} \\ 
+\midrule\addlinespace[2.5pt]
+log\_home\_val\_07 & 12.26 (0.37) & 12.29 (0.29) \\ 
+p\_uni\_degree & 0.17 (0.12) & 0.13 (0.09) \\ 
+log\_median\_inc & 10.32 (0.22) & 10.31 (0.19) \\ 
+log\_pop\_denc & 5.12 (2.40) & 3.54 (1.78) \\ 
+\bottomrule
+\end{tabular*}
+\begin{minipage}{\linewidth}
+\vspace{.05em}
+\textsuperscript{\textit{1}} Mean (SD)\\
+\end{minipage}
+\end{table}
+
+\textbf{2B.Q1} Summarize the table output: Which covariates look
+balanced/imbalanced?
+
+\emph{Response:} \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+For my control and treatment groups, the log\_home\_val\_07 and
+log\_median\_inc variables seem to be pretty balanced, the
+p\_uni\_degree variable difference is moderate, and the log\_pop\_denc
+variable is severely unbalanced.
+
+\textbf{2B.Q2} Describe in your own words why these covariates might be
+expected to confound the treatment estimate:
+
+\emph{Response (2-4 sentences):}
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+The proportion with university degrees (\texttt{p\_uni\_degree}) and
+population density (\texttt{log\_pop\_denc}) could both confound the
+treatment estimate because they're associated with political
+preferences. Precincts with higher proportions of university graduates
+tend to vote more liberal, while rural precincts with a lower population
+density tend to vote less liberal. This could mean the differences we
+see between our control and treatment group is due to these pre-existing
+differences and not necessarily wind turbines.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\textbf{2B.Q3} Intuition check: What type of data do you need to conduct
+a matching analysis?
+
+\emph{Response:} \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+You need to have a lot of pre-treatment covariates and a lot of control
+data relative to treated data.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{\texorpdfstring{Conduct matching estimation using the
+\{\texttt{MatchIt}\}
+package:}{Conduct matching estimation using the \{MatchIt\} package:}}\label{conduct-matching-estimation-using-the-matchit-package}
+
+📜 \href{https://kosukeimai.github.io/MatchIt/}{Documentation - MatchIt}
+
+Learning goals:
+
+\begin{itemize}
+\tightlist
+\item
+  Approximate the Mahalanobis matching method used in Stokes (2015)
+\item
+  Implement another common matching approach called
+  \texttt{propensity\ score\ matching}
+\end{itemize}
+
+\begin{tcolorbox}[enhanced jigsaw, colback=white, breakable, rightrule=.15mm, leftrule=.75mm, colframe=quarto-callout-color-frame, opacityback=0, arc=.35mm, bottomrule=.15mm, toprule=.15mm, left=2mm]
+
+\texttt{NOTE}: In the replication code associated with Stokes (2015) the
+\{\texttt{AER}\} package is used for Mahalanobis matching. In this
+assignment we use the \{\texttt{MatchIt}\} package. The results are
+comparable but will not be exactly the same.
+
+\end{tcolorbox}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{2C. Mahalanobis nearest-neighbor
+matching}\label{c.-mahalanobis-nearest-neighbor-matching}
+
+\begin{itemize}
+\tightlist
+\item
+  Conduct Mahalanobis matching\\
+\item
+  Use nearest-neighbor match without replacement using Mahalanobis
+  distance
+\item
+  Use 1-to-1 matching (match one control unit to each treatment unit)
+\item
+  Extract the matched data using \texttt{match.data()}
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{2412026}\NormalTok{)}
+
+\NormalTok{match\_model }\OtherTok{\textless{}{-}} \FunctionTok{matchit}\NormalTok{(proposed\_turbine\_3km }\SpecialCharTok{\textasciitilde{}}\NormalTok{ log\_home\_val\_07 }\SpecialCharTok{+} 
+\NormalTok{    p\_uni\_degree }\SpecialCharTok{+}
+\NormalTok{    log\_median\_inc }\SpecialCharTok{+}
+\NormalTok{    log\_pop\_denc,}
+  \AttributeTok{data =}\NormalTok{ match\_data, }
+  \AttributeTok{method =} \StringTok{"nearest"}\NormalTok{,       }\CommentTok{\# Nearest neighbor matching}
+  \AttributeTok{distance =} \StringTok{"mahalanobis"}\NormalTok{, }\CommentTok{\# Mahalanobis distance}
+  \AttributeTok{ratio =} \DecValTok{1}\NormalTok{,                }\CommentTok{\# Match one control unit to one treatment unit (1:1 matching)}
+  \AttributeTok{replace =} \ConstantTok{FALSE}           \CommentTok{\# Control observations are not replaced}
+\NormalTok{)}
+
+\CommentTok{\# Extract matched data}
+\NormalTok{matched\_data }\OtherTok{\textless{}{-}} \FunctionTok{match.data}\NormalTok{(match\_model)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(match\_model)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+
+Call:
+matchit(formula = proposed_turbine_3km ~ log_home_val_07 + p_uni_degree + 
+    log_median_inc + log_pop_denc, data = match_data, method = "nearest", 
+    distance = "mahalanobis", replace = FALSE, ratio = 1)
+
+Summary of Balance for All Data:
+                Means Treated Means Control Std. Mean Diff. Var. Ratio
+log_home_val_07       12.2948       12.2620          0.1138     0.5941
+p_uni_degree           0.1257        0.1688         -0.5032     0.4916
+log_median_inc        10.3096       10.3219         -0.0636     0.7581
+log_pop_denc           3.5398        5.1192         -0.8897     0.5474
+                eCDF Mean eCDF Max
+log_home_val_07    0.0382   0.0881
+p_uni_degree       0.1032   0.1769
+log_median_inc     0.0355   0.0750
+log_pop_denc       0.2099   0.3713
+
+Summary of Balance for Matched Data:
+                Means Treated Means Control Std. Mean Diff. Var. Ratio
+log_home_val_07       12.2948       12.2975         -0.0093     1.0063
+p_uni_degree           0.1257        0.1262         -0.0060     1.0485
+log_median_inc        10.3096       10.3096          0.0002     1.0403
+log_pop_denc           3.5398        3.5982         -0.0329     0.9784
+                eCDF Mean eCDF Max Std. Pair Dist.
+log_home_val_07    0.0075   0.0282          0.1334
+p_uni_degree       0.0088   0.0367          0.1642
+log_median_inc     0.0073   0.0395          0.1225
+log_pop_denc       0.0109   0.0508          0.1485
+
+Sample Sizes:
+          Control Treated
+All          5619     354
+Matched       354     354
+Unmatched    5265       0
+Discarded       0       0
+\end{verbatim}
+
+\textbf{2C.Q1} Using the \texttt{summary()} output: Which covariate had
+the largest and smallest \texttt{Std.\ Mean\ Diff.} before matching.
+Next, compare largest/smallest \texttt{Std.\ Mean\ Diff.} after
+matching.
+
+\emph{Response:} \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+Largest Std. Meal Diff Before Matching
+
+\begin{itemize}
+\tightlist
+\item
+  log\_pop\_denc
+\end{itemize}
+
+Smallest Std. Meal Diff Before Matching
+
+\begin{itemize}
+\tightlist
+\item
+  log\_median\_inc
+\end{itemize}
+
+After matching log\_pop\_denc still has the largest Std but it is much
+smaller (-0.8897 vs -0.0329). log\_median\_inc still has the smallest
+Std but is even smaller (-0.0636 vs 0.0002) - we now see a near perfect
+match for this variable.
+
+\paragraph{\texorpdfstring{2D. Create a ``love plot'' using
+\texttt{love.plot()}
+❤️}{2D. Create a ``love plot'' using love.plot() ❤️}}\label{d.-create-a-love-plot-using-love.plot}
+
+📜 \href{https://ngreifer.github.io/cobalt/}{Documentation - cobalt}
+
+\begin{itemize}
+\tightlist
+\item
+  Plot mean differences for data before \& after matching across all
+  pre-treatment covariates
+\item
+  This is an effective way to evaluate how effective matching was at
+  achieving balance.
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{itemize}
+\tightlist
+\item
+  Make a love plot of standardized mean differences (SMDs) before vs
+  after matching.
+\item
+  Include a threshold line at 0.1.
+\item
+  In love plot display \texttt{mean.diffs}
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{new\_names }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}
+    \AttributeTok{old =} \FunctionTok{c}\NormalTok{(}\StringTok{"log\_home\_val\_07"}\NormalTok{, }\StringTok{"p\_uni\_degree"}\NormalTok{, }\StringTok{"log\_median\_inc"}\NormalTok{, }\StringTok{"log\_pop\_denc"}\NormalTok{),}
+    \AttributeTok{new =} \FunctionTok{c}\NormalTok{(}\StringTok{"Home Value (log)"}\NormalTok{, }\StringTok{"Percent University Degree"}\NormalTok{,}
+            \StringTok{"Median Income (log)"}\NormalTok{, }\StringTok{"Population Density (log)"}\NormalTok{))}
+
+\CommentTok{\# Love plot}
+\FunctionTok{love.plot}\NormalTok{(match\_model, }\AttributeTok{stats =} \StringTok{"mean.diffs"}\NormalTok{,}
+          \AttributeTok{thresholds =} \FunctionTok{c}\NormalTok{(}\AttributeTok{m =} \FloatTok{0.1}\NormalTok{),}
+          \AttributeTok{var.names =}\NormalTok{ new\_names)}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{HW2_START_files/figure-pdf/unnamed-chunk-6-1.pdf}}
+
+\textbf{2D.Q1} Interpret the love plot in your own words:
+
+\emph{Response:} \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+The love plot shows the standardized mean differences between the
+control and treatment of our covariates decreased significantly after we
+matched treatments to their closest counterfactual.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{Propensity score
+matching}\label{propensity-score-matching}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{2E. Propensity Score Matching
+(PSM)}\label{e.-propensity-score-matching-psm}
+
+\begin{itemize}
+\tightlist
+\item
+  Estimate 1:1 nearest-neighbor Propensity Score Matching
+\item
+  Same code as above except change \texttt{distance\ =\ "logit"}
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{2412026}\NormalTok{)}
+
+\NormalTok{propensity\_scores }\OtherTok{\textless{}{-}} \FunctionTok{matchit}\NormalTok{(proposed\_turbine\_3km }\SpecialCharTok{\textasciitilde{}}\NormalTok{ log\_home\_val\_07 }\SpecialCharTok{+} 
+\NormalTok{    p\_uni\_degree }\SpecialCharTok{+}
+\NormalTok{    log\_median\_inc }\SpecialCharTok{+}
+\NormalTok{    log\_pop\_denc,}
+  \AttributeTok{data =}\NormalTok{ match\_data, }
+  \AttributeTok{method =} \StringTok{"nearest"}\NormalTok{,       }\CommentTok{\# Nearest neighbor matching}
+  \AttributeTok{distance =} \StringTok{"logit"}\NormalTok{,       }\CommentTok{\# logit distance}
+  \AttributeTok{ratio =} \DecValTok{1}\NormalTok{,                }\CommentTok{\# Match one control unit to one treatment unit (1:1 matching)}
+  \AttributeTok{replace =} \ConstantTok{FALSE}           \CommentTok{\# Control observations are not replaced}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{\texorpdfstring{Create table displaying covariate balance
+using
+\texttt{cobalt::bal.tab()}}{Create table displaying covariate balance using cobalt::bal.tab()}}\label{create-table-displaying-covariate-balance-using-cobaltbal.tab}
+
+📜 \href{https://ngreifer.github.io/cobalt/}{Documentation - cobalt}
+
+Use \texttt{bal.tab()} to report balance before and after matching.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{bal.tab}\NormalTok{(propensity\_scores, }
+        \AttributeTok{un =} \ConstantTok{TRUE}\NormalTok{,}
+        \AttributeTok{var.names =}\NormalTok{ new\_names) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Balance Measures
+                    Type Diff.Un Diff.Adj
+distance        Distance  0.7248   0.0001
+log_home_val_07  Contin.  0.1138   0.0205
+p_uni_degree     Contin. -0.5032   0.0457
+log_median_inc   Contin. -0.0636  -0.0042
+log_pop_denc     Contin. -0.8897  -0.0365
+
+Sample sizes
+          Control Treated
+All          5619     354
+Matched       354     354
+Unmatched    5265       0
+\end{verbatim}
+
+\textbf{2E.Q1} Compare Mahalanobis vs propensity score matching. Which
+method did a better job at achieving balance?
+
+\emph{Response:} \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+Mahalanobis had a smaller standard mean difference across all
+covariates. Because of this, Mahalanobis did a better job at achieving
+balance.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{2F. Estimate an effect in the matched
+sample}\label{f.-estimate-an-effect-in-the-matched-sample}
+
+Using the matched data (Mahalanobis method), estimate the effect of
+treatment on the change in incumbent vote share
+(\texttt{change\_liberal}).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{reg\_match }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(change\_liberal }\SpecialCharTok{\textasciitilde{}}\NormalTok{ proposed\_turbine\_3km,}
+                    \AttributeTok{data =}\NormalTok{ matched\_data,}
+                    \AttributeTok{weights =}\NormalTok{ weights)}
+
+\FunctionTok{summ}\NormalTok{(reg\_match, }\AttributeTok{model.fit =} \ConstantTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{table}[!h]
+\centering
+\begin{tabular}{lr}
+\toprule
+\cellcolor{gray!10}{Observations} & \cellcolor{gray!10}{708}\\
+Dependent variable & change\_liberal\\
+\cellcolor{gray!10}{Type} & \cellcolor{gray!10}{OLS linear regression}\\
+\bottomrule
+\end{tabular}
+\end{table}  \begin{table}[!h]
+\centering
+\begin{threeparttable}
+\begin{tabular}{lrrrr}
+\toprule
+  & Est. & S.E. & t val. & p\\
+\midrule
+\cellcolor{gray!10}{(Intercept)} & \cellcolor{gray!10}{-0.07} & \cellcolor{gray!10}{0.01} & \cellcolor{gray!10}{-10.96} & \cellcolor{gray!10}{0.00}\\
+proposed\_turbine\_3km & -0.06 & 0.01 & -7.25 & 0.00\\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}
+\item Standard errors: OLS
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+\textbf{2F.Q1} Have you identified a causal estimate using this
+approach: Why or why not?
+
+\emph{Response:} \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+Assumption that I have balanced relevant confounding variables, I have
+found a causal estimate using this approach. Since I matched treatment
+groups to their closest control match, this minimized group differences
+that are not due to proximity to wind turbines. This isolated the effect
+of proximity to wind turbines. The coefficient for this variable was
+found to be statistically signfiicant coefficient, suggesting proximity
+to turbines is associated with a 6\% decline in Liberal vote share.
+
+\textbf{2F.Q2} When using a matching method, what is the main threat to
+causal identification?
+
+\emph{Response:} \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+The main threat is that matching alone does not address potential
+selection bias coming from variables that were not observed.
+
+\textbf{2F.Q3} Describe why the treatment estimate represents the
+\texttt{Average\ Treatment\ for\ the\ Treated\ (ATT)} and explain why
+this is the case relative to estimation of the
+\texttt{Average\ Treatment\ Effect\ (ATE)}.
+
+\emph{Response:} \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+It represents the ATT because the treatment estimate comes from the
+effect of the treatment on the 354 treated precincts relative to the
+matched 354 control precincts - not the full sample of over 5,000
+control precincts. This means we're only estimating the effect of
+turbines on precincts for 354 matched groups. If we had estimated the
+effect of this treatment on all the precinct in our model this would
+have given us ATE.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{Part 3: Panel Data, Fixed Effects, and
+Difference-in-Difference}\label{part-3-panel-data-fixed-effects-and-difference-in-difference}
+
+\textbf{Data source:}
+\href{https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/SDUGCC}{Dataverse-Stokes2015}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{\texorpdfstring{\textbf{3A:} Read in the panel data + code
+variables \texttt{precinct\_id} and \texttt{year} as
+factors}{3A: Read in the panel data + code variables precinct\_id and year as factors}}\label{a-read-in-the-panel-data-code-variables-precinct_id-and-year-as-factors}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{panel\_data }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\FunctionTok{here}\NormalTok{(}\StringTok{"data"}\NormalTok{, }\StringTok{"Stokes15\_panel\_data.csv"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} 
+    \FunctionTok{mutate}\NormalTok{(}\AttributeTok{precinct\_id =} \FunctionTok{as.factor}\NormalTok{(precinct\_id),}
+           \AttributeTok{year =} \FunctionTok{as.factor}\NormalTok{(year))}
+
+\CommentTok{\# HINT: Try running \textasciigrave{}tabyl(panel\_data$year)\textasciigrave{}. Review article to make sense of the row numbers (n).}
+
+\FunctionTok{tabyl}\NormalTok{(panel\_data}\SpecialCharTok{$}\NormalTok{year)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+ panel_data$year    n   percent
+            2003 6186 0.3333333
+            2007 6186 0.3333333
+            2011 6186 0.3333333
+\end{verbatim}
+
+\textbf{3A.Q1:} Why are there 18,558 rows in \texttt{panel\_data}?
+
+\emph{Response:} \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+There were 18,558 rows in panel\_data because there are 6186 precincts
+and this data is collected once a year across three years. 18,558 is
+simply the result of 6186 three times.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# How many years are included in the panel?}
+
+\CommentTok{\# How many precincts are there? }
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{3A.Q2:} How many unique precincts are \emph{ever treated} (i.e.,
+\texttt{proposed} \& \texttt{operational})?
+
+\emph{Response:} \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+There are 184 unique precincts ever treated in the proposed category and
+52 unique precincts ever treated in the operational category.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{panel\_data }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(precinct\_id) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}
+    \AttributeTok{ever\_proposed    =} \FunctionTok{any}\NormalTok{(proposed\_turbine }\SpecialCharTok{==} \DecValTok{1}\NormalTok{, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
+    \AttributeTok{ever\_operational =} \FunctionTok{any}\NormalTok{(operational\_turbine }\SpecialCharTok{==} \DecValTok{1}\NormalTok{, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
+    \AttributeTok{.groups =} \StringTok{"drop"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}
+    \AttributeTok{n\_ever\_proposed    =} \FunctionTok{sum}\NormalTok{(ever\_proposed),}
+    \AttributeTok{n\_ever\_operational =} \FunctionTok{sum}\NormalTok{(ever\_operational))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+# A tibble: 1 x 2
+  n_ever_proposed n_ever_operational
+            <int>              <int>
+1             184                 52
+\end{verbatim}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{\texorpdfstring{\textbf{3B.} Plot and evaluate parallel
+trends: Replicate \texttt{Figure.2} (Stokes,
+2015)}{3B. Plot and evaluate parallel trends: Replicate Figure.2 (Stokes, 2015)}}\label{b.-plot-and-evaluate-parallel-trends-replicate-figure.2-stokes-2015}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Create indicators for whether each precinct is ever treated by 2011
+  (\texttt{treat\_p}, \texttt{treat\_o}; separate indicator for
+  proposals and operational turbines).
+\item
+  Plot mean incumbent vote share by year for treated vs control
+  precincts (with 95\% CIs).
+\item
+  Facet by turbine type (proposed \& operational)
+\end{enumerate}
+
+Step 1: Prepare data
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{trends\_data }\OtherTok{\textless{}{-}}\NormalTok{ panel\_data }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(precinct\_id) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}
+    \AttributeTok{treat\_p =} \FunctionTok{as.integer}\NormalTok{(}\FunctionTok{any}\NormalTok{(proposed\_turbine }\SpecialCharTok{==} \DecValTok{1}\NormalTok{, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)),  }\CommentTok{\# ever proposed (in any year)}
+    \AttributeTok{treat\_o =} \FunctionTok{as.integer}\NormalTok{(}\FunctionTok{any}\NormalTok{(operational\_turbine }\SpecialCharTok{==} \DecValTok{1}\NormalTok{, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{))) }\SpecialCharTok{\%\textgreater{}\%} \CommentTok{\# ever operational (in any year)}
+  \FunctionTok{ungroup}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{pivot\_longer}\NormalTok{(}\FunctionTok{c}\NormalTok{(treat\_p, treat\_o),}
+               \AttributeTok{names\_to =} \StringTok{"turbine\_type"}\NormalTok{, }\AttributeTok{values\_to =} \StringTok{"treat"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{mutate}\NormalTok{(}
+      \AttributeTok{turbine\_type =} \FunctionTok{factor}\NormalTok{(turbine\_type,}
+                            \AttributeTok{levels =} \FunctionTok{c}\NormalTok{(}\StringTok{"treat\_p"}\NormalTok{, }\StringTok{"treat\_o"}\NormalTok{),}
+                            \AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"Proposed turbines"}\NormalTok{, }\StringTok{"Operational turbines"}\NormalTok{)),  }
+    \AttributeTok{status =} \FunctionTok{if\_else}\NormalTok{(treat }\SpecialCharTok{==} \DecValTok{1}\NormalTok{, }\StringTok{"Treated"}\NormalTok{, }\StringTok{"Control"}\NormalTok{),}
+    \AttributeTok{year   =} \FunctionTok{factor}\NormalTok{(year))}
+\end{Highlighting}
+\end{Shaded}
+
+Step 2: Create trends plot
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pd }\OtherTok{\textless{}{-}} \FunctionTok{position\_dodge}\NormalTok{(}\AttributeTok{width =} \FloatTok{0.15}\NormalTok{)}
+
+\NormalTok{trends\_data }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(turbine\_type, status, year) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}
+    \AttributeTok{mean =} \FunctionTok{mean}\NormalTok{(perc\_lib, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{),}
+    \AttributeTok{n    =} \FunctionTok{sum}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(perc\_lib)),}
+    \AttributeTok{se   =} \FunctionTok{sd}\NormalTok{(perc\_lib, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{) }\SpecialCharTok{/} \FunctionTok{sqrt}\NormalTok{(n), }
+    \AttributeTok{ci   =} \FunctionTok{qt}\NormalTok{(.}\DecValTok{975}\NormalTok{, }\AttributeTok{df =} \FunctionTok{pmax}\NormalTok{(n }\SpecialCharTok{{-}} \DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{)) }\SpecialCharTok{*}\NormalTok{ se,}
+    \AttributeTok{.groups =} \StringTok{"drop"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+\FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(year, mean, }\AttributeTok{color =}\NormalTok{ status, }\AttributeTok{group =}\NormalTok{ status)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_line}\NormalTok{(}\AttributeTok{position =}\NormalTok{ pd, }\AttributeTok{linewidth =} \FloatTok{1.2}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{position =}\NormalTok{ pd, }\AttributeTok{size =} \FloatTok{2.6}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_errorbar}\NormalTok{(}
+    \FunctionTok{aes}\NormalTok{(}\AttributeTok{ymin =}\NormalTok{ mean }\SpecialCharTok{{-}}\NormalTok{ ci, }\AttributeTok{ymax =}\NormalTok{ mean }\SpecialCharTok{+}\NormalTok{ ci),}
+    \AttributeTok{position =}\NormalTok{ pd, }\AttributeTok{width =}\NormalTok{ .}\DecValTok{12}\NormalTok{, }\AttributeTok{linewidth =}\NormalTok{ .}\DecValTok{7}\NormalTok{, }\AttributeTok{color =} \StringTok{"black"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{facet\_wrap}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{ turbine\_type, }\AttributeTok{nrow =} \DecValTok{1}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_color\_manual}\NormalTok{(}\AttributeTok{values =} \FunctionTok{c}\NormalTok{(}\AttributeTok{Control =} \StringTok{"\#0072B2"}\NormalTok{, }\AttributeTok{Treated =} \StringTok{"\#B22222"}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{scale\_y\_continuous}\NormalTok{(}\AttributeTok{labels =} \FunctionTok{percent\_format}\NormalTok{(}\AttributeTok{accuracy =} \DecValTok{1}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{coord\_cartesian}\NormalTok{(}\AttributeTok{ylim =} \FunctionTok{c}\NormalTok{(.}\DecValTok{20}\NormalTok{, .}\DecValTok{57}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{title =} \StringTok{"Figure 2. Trends in the Governing Party’s Vote Share"}\NormalTok{,}
+    \AttributeTok{x =} \StringTok{"Election Year"}\NormalTok{,}
+    \AttributeTok{y =} \StringTok{"Liberal Party Vote Share"}\NormalTok{,}
+    \AttributeTok{color =} \ConstantTok{NULL}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{(}\AttributeTok{base\_size =} \DecValTok{14}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}
+    \AttributeTok{panel.grid.minor =} \FunctionTok{element\_blank}\NormalTok{(),}
+    \AttributeTok{legend.position =} \StringTok{"bottom"}\NormalTok{,}
+    \AttributeTok{strip.text =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{face =} \StringTok{"bold"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{HW2_START_files/figure-pdf/unnamed-chunk-14-1.pdf}}
+
+\textbf{3B.Q1:} Write a short paragraph assessing the parallel trends
+assumption for each outcome.
+
+\emph{Response (4-6 sentences):}
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+For the proposed turbines group, the parallel trends assumption seems
+well satisfied. The pre-treatment period for the control and treatment
+groups seem to match up well and the treated group seems to experience a
+decline following the introduction of the turbine proposal. For the
+operational turbines group, the parallel trends assumption is not
+satisfied as well. During the pre-treatment period for the control and
+treatment groups, it seems that the treated group starts at a higher
+initial liberal party vote share than the control group. Regardless, we
+also see a decline following the introduction of the turbine proposal
+for operational turbine precincts.
+
+\subsubsection{Estimating Fixed Effects Models (DiD) for
+proposals}\label{estimating-fixed-effects-models-did-for-proposals}
+
+\[
+\text{Y}_{it}
+=  \alpha_0 +
+\beta \cdot (\text{proposed_turbine}_{it})
++ \gamma_i
++ \delta_t
++ \varepsilon_{it}
+\]
+
+\begin{itemize}
+\tightlist
+\item
+  \(Y_{it}\) is the vote share for the Liberal Party in precinct
+  \emph{i} in time \emph{t}
+\item
+  \(\beta\) is the treatment effect of a turbine being proposed within a
+  precinct
+\item
+  \(\gamma_i\) is the precinct fixed effect
+\item
+  \(\delta_t\) is the year fixed effect
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{Example 1: Randomly sample 40
+precincts}\label{example-1-randomly-sample-40-precincts}
+
+\begin{itemize}
+\tightlist
+\item
+  To illustrate the ``dummy variable method'' of estimating fixed
+  effects using the the general \texttt{lm()} function we are going to
+  randomly sample 40 precincts (20 ``treated'' precincts with proposed
+  turbines).
+\item
+  If we attempted to use this approach with the full sample estimating
+  all 6185 (n-1) precinct-level coefficients is impractical (it would
+  take a long time).
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{40002026}\NormalTok{)}
+
+\NormalTok{precinct\_frame }\OtherTok{\textless{}{-}}\NormalTok{ panel\_data }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(precinct\_id) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}
+    \AttributeTok{proposed\_turbine\_any =} \FunctionTok{as.integer}\NormalTok{(}\FunctionTok{any}\NormalTok{(proposed\_turbine }\SpecialCharTok{==} \DecValTok{1}\NormalTok{, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)),}
+    \AttributeTok{.groups =} \StringTok{"drop"}
+\NormalTok{  )}
+
+\NormalTok{ids\_40 }\OtherTok{\textless{}{-}}\NormalTok{ precinct\_frame }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(proposed\_turbine\_any) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{slice\_sample}\NormalTok{(}\AttributeTok{n =} \DecValTok{20}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ungroup}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(precinct\_id)}
+
+\NormalTok{sample\_40\_precincts }\OtherTok{\textless{}{-}}\NormalTok{ panel\_data }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{semi\_join}\NormalTok{(ids\_40, }\AttributeTok{by =} \StringTok{"precinct\_id"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{\texorpdfstring{\textbf{3C:} Estimate a fixed effects model
+using \texttt{lm()} with fixed effects added for \texttt{precinct} and
+\texttt{year} using the sample of 40 precincts just
+created.}{3C: Estimate a fixed effects model using lm() with fixed effects added for precinct and year using the sample of 40 precincts just created.}}\label{c-estimate-a-fixed-effects-model-using-lm-with-fixed-effects-added-for-precinct-and-year-using-the-sample-of-40-precincts-just-created.}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{model1\_ff }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(perc\_lib }\SpecialCharTok{\textasciitilde{}}\NormalTok{ proposed\_turbine }\SpecialCharTok{+} 
+\NormalTok{                   precinct\_id }\SpecialCharTok{+} 
+\NormalTok{                   year,}
+                \AttributeTok{data =}\NormalTok{ sample\_40\_precincts)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summ}\NormalTok{(model1\_ff , }\AttributeTok{model.fit =} \ConstantTok{FALSE}\NormalTok{, }\AttributeTok{digits =} \DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{table}[!h]
+\centering
+\begin{tabular}{lr}
+\toprule
+\cellcolor{gray!10}{Observations} & \cellcolor{gray!10}{120}\\
+Dependent variable & perc\_lib\\
+\cellcolor{gray!10}{Type} & \cellcolor{gray!10}{OLS linear regression}\\
+\bottomrule
+\end{tabular}
+\end{table}  \begin{table}[!h]
+\centering
+\begin{threeparttable}
+\begin{tabular}{lrrrr}
+\toprule
+  & Est. & S.E. & t val. & p\\
+\midrule
+\cellcolor{gray!10}{(Intercept)} & \cellcolor{gray!10}{0.275} & \cellcolor{gray!10}{0.050} & \cellcolor{gray!10}{5.460} & \cellcolor{gray!10}{0.000}\\
+proposed\_turbine & -0.057 & 0.031 & -1.858 & 0.067\\
+\cellcolor{gray!10}{precinct\_id10.115s.10.84.} & \cellcolor{gray!10}{0.166} & \cellcolor{gray!10}{0.069} & \cellcolor{gray!10}{2.402} & \cellcolor{gray!10}{0.019}\\
+precinct\_id105.038.105.45. & 0.053 & 0.069 & 0.765 & 0.447\\
+\cellcolor{gray!10}{precinct\_id14.149.14.79.} & \cellcolor{gray!10}{0.208} & \cellcolor{gray!10}{0.070} & \cellcolor{gray!10}{2.976} & \cellcolor{gray!10}{0.004}\\
+\addlinespace
+precinct\_id14.168.14.82. & 0.192 & 0.070 & 2.749 & 0.007\\
+\cellcolor{gray!10}{precinct\_id18.003.18.1.} & \cellcolor{gray!10}{0.121} & \cellcolor{gray!10}{0.070} & \cellcolor{gray!10}{1.738} & \cellcolor{gray!10}{0.086}\\
+precinct\_id18.033.18.19. & -0.002 & 0.072 & -0.034 & 0.973\\
+\cellcolor{gray!10}{precinct\_id21.126.21.179.} & \cellcolor{gray!10}{0.204} & \cellcolor{gray!10}{0.069} & \cellcolor{gray!10}{2.950} & \cellcolor{gray!10}{0.004}\\
+precinct\_id22.061.22.60. & 0.213 & 0.070 & 3.047 & 0.003\\
+\addlinespace
+\cellcolor{gray!10}{precinct\_id22.124.22.52.} & \cellcolor{gray!10}{0.156} & \cellcolor{gray!10}{0.070} & \cellcolor{gray!10}{2.230} & \cellcolor{gray!10}{0.029}\\
+precinct\_id22.137.22.193. & 0.179 & 0.069 & 2.590 & 0.011\\
+\cellcolor{gray!10}{precinct\_id22.158.22.203.} & \cellcolor{gray!10}{0.165} & \cellcolor{gray!10}{0.070} & \cellcolor{gray!10}{2.357} & \cellcolor{gray!10}{0.021}\\
+precinct\_id22.209.22.172. & 0.188 & 0.070 & 2.699 & 0.009\\
+\cellcolor{gray!10}{precinct\_id28.056.28.149.} & \cellcolor{gray!10}{-0.011} & \cellcolor{gray!10}{0.070} & \cellcolor{gray!10}{-0.160} & \cellcolor{gray!10}{0.873}\\
+\addlinespace
+precinct\_id28.072.28.98. & 0.097 & 0.069 & 1.409 & 0.163\\
+\cellcolor{gray!10}{precinct\_id28.139.28.145.} & \cellcolor{gray!10}{0.040} & \cellcolor{gray!10}{0.072} & \cellcolor{gray!10}{0.553} & \cellcolor{gray!10}{0.582}\\
+precinct\_id28.163.28.69. & 0.124 & 0.069 & 1.802 & 0.075\\
+\cellcolor{gray!10}{precinct\_id29.241.29.172.} & \cellcolor{gray!10}{0.067} & \cellcolor{gray!10}{0.070} & \cellcolor{gray!10}{0.958} & \cellcolor{gray!10}{0.341}\\
+precinct\_id34.050.34.39. & 0.342 & 0.069 & 4.947 & 0.000\\
+\addlinespace
+\cellcolor{gray!10}{precinct\_id34.151.34.125.} & \cellcolor{gray!10}{0.098} & \cellcolor{gray!10}{0.070} & \cellcolor{gray!10}{1.399} & \cellcolor{gray!10}{0.166}\\
+precinct\_id36.133.36.92. & 0.358 & 0.069 & 5.179 & 0.000\\
+\cellcolor{gray!10}{precinct\_id40.044.40.68.} & \cellcolor{gray!10}{0.236} & \cellcolor{gray!10}{0.072} & \cellcolor{gray!10}{3.275} & \cellcolor{gray!10}{0.002}\\
+precinct\_id40.098.40.120. & 0.195 & 0.070 & 2.792 & 0.007\\
+\cellcolor{gray!10}{precinct\_id40.134.40.174.} & \cellcolor{gray!10}{0.216} & \cellcolor{gray!10}{0.069} & \cellcolor{gray!10}{3.127} & \cellcolor{gray!10}{0.002}\\
+\addlinespace
+precinct\_id40.243.40.22. & 0.325 & 0.070 & 4.651 & 0.000\\
+\cellcolor{gray!10}{precinct\_id40.244.40.46.} & \cellcolor{gray!10}{0.178} & \cellcolor{gray!10}{0.070} & \cellcolor{gray!10}{2.543} & \cellcolor{gray!10}{0.013}\\
+precinct\_id55.228.55.180. & 0.130 & 0.069 & 1.883 & 0.064\\
+\cellcolor{gray!10}{precinct\_id58.162.58.98.} & \cellcolor{gray!10}{0.278} & \cellcolor{gray!10}{0.069} & \cellcolor{gray!10}{4.024} & \cellcolor{gray!10}{0.000}\\
+precinct\_id58.232.58.231. & 0.203 & 0.069 & 2.940 & 0.004\\
+\addlinespace
+\cellcolor{gray!10}{precinct\_id67.141.67.123.} & \cellcolor{gray!10}{0.022} & \cellcolor{gray!10}{0.070} & \cellcolor{gray!10}{0.311} & \cellcolor{gray!10}{0.757}\\
+precinct\_id69.073.69.35. & 0.070 & 0.069 & 1.015 & 0.313\\
+\cellcolor{gray!10}{precinct\_id70.081.70.44.} & \cellcolor{gray!10}{0.062} & \cellcolor{gray!10}{0.069} & \cellcolor{gray!10}{0.899} & \cellcolor{gray!10}{0.372}\\
+precinct\_id70.135.70.105. & 0.441 & 0.069 & 6.388 & 0.000\\
+\cellcolor{gray!10}{precinct\_id70.221.70.155.} & \cellcolor{gray!10}{0.247} & \cellcolor{gray!10}{0.069} & \cellcolor{gray!10}{3.576} & \cellcolor{gray!10}{0.001}\\
+\addlinespace
+precinct\_id73.248.73.180. & 0.187 & 0.070 & 2.672 & 0.009\\
+\cellcolor{gray!10}{precinct\_id73.251.73.180.} & \cellcolor{gray!10}{0.204} & \cellcolor{gray!10}{0.070} & \cellcolor{gray!10}{2.927} & \cellcolor{gray!10}{0.005}\\
+precinct\_id87.017.87.58. & 0.127 & 0.069 & 1.836 & 0.070\\
+\cellcolor{gray!10}{precinct\_id87.053.87.68.} & \cellcolor{gray!10}{0.214} & \cellcolor{gray!10}{0.069} & \cellcolor{gray!10}{3.100} & \cellcolor{gray!10}{0.003}\\
+precinct\_id87.213.87.24. & 0.033 & 0.070 & 0.469 & 0.641\\
+\addlinespace
+\cellcolor{gray!10}{precinct\_id98.009.98.12.} & \cellcolor{gray!10}{0.129} & \cellcolor{gray!10}{0.069} & \cellcolor{gray!10}{1.868} & \cellcolor{gray!10}{0.066}\\
+year2007 & -0.045 & 0.019 & -2.364 & 0.021\\
+\cellcolor{gray!10}{year2011} & \cellcolor{gray!10}{-0.131} & \cellcolor{gray!10}{0.024} & \cellcolor{gray!10}{-5.381} & \cellcolor{gray!10}{0.000}\\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}
+\item Standard errors: OLS
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+\textbf{3C.Q1:} Intuition check: Is the \emph{signal-to-noise} ratio for
+the treatment estimate greater than \emph{2-to-1}?
+
+\emph{Response:} \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+\begin{quote}
+HINT: Add the argument \texttt{digits\ =\ 3} to the \texttt{summ()}
+function above
+
+No, the signal-to-noise ratio for the treatment estimate is not greater
+than 2 - 1. It is not significant.
+\end{quote}
+
+\textbf{3C.Q2:} Re-run the \texttt{summ()} function using the
+\emph{heteroscedasticiy robust standard error adjustment}
+(\texttt{robust\ =\ TRUE}). Did the standard error (S.E.) estimates
+change? Explain why.
+
+\emph{Response:} \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+Yes the standard error became larger. This is because using the
+\emph{heteroscedasticiy robust standard error adjustment} allows for
+variance in the standard error across observations. This causes more
+variation in standard errors than the previous calculation which assumed
+a constant variance.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summ}\NormalTok{(model1\_ff , }\AttributeTok{model.fit =} \ConstantTok{FALSE}\NormalTok{, }\AttributeTok{digits =} \DecValTok{3}\NormalTok{, }\AttributeTok{robust =} \ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{table}[!h]
+\centering
+\begin{tabular}{lr}
+\toprule
+\cellcolor{gray!10}{Observations} & \cellcolor{gray!10}{120}\\
+Dependent variable & perc\_lib\\
+\cellcolor{gray!10}{Type} & \cellcolor{gray!10}{OLS linear regression}\\
+\bottomrule
+\end{tabular}
+\end{table}  \begin{table}[!h]
+\centering
+\begin{threeparttable}
+\begin{tabular}{lrrrr}
+\toprule
+  & Est. & S.E. & t val. & p\\
+\midrule
+\cellcolor{gray!10}{(Intercept)} & \cellcolor{gray!10}{0.275} & \cellcolor{gray!10}{0.085} & \cellcolor{gray!10}{3.247} & \cellcolor{gray!10}{0.002}\\
+proposed\_turbine & -0.057 & 0.039 & -1.465 & 0.147\\
+\cellcolor{gray!10}{precinct\_id10.115s.10.84.} & \cellcolor{gray!10}{0.166} & \cellcolor{gray!10}{0.101} & \cellcolor{gray!10}{1.646} & \cellcolor{gray!10}{0.104}\\
+precinct\_id105.038.105.45. & 0.053 & 0.104 & 0.509 & 0.612\\
+\cellcolor{gray!10}{precinct\_id14.149.14.79.} & \cellcolor{gray!10}{0.208} & \cellcolor{gray!10}{0.094} & \cellcolor{gray!10}{2.201} & \cellcolor{gray!10}{0.031}\\
+\addlinespace
+precinct\_id14.168.14.82. & 0.192 & 0.110 & 1.751 & 0.084\\
+\cellcolor{gray!10}{precinct\_id18.003.18.1.} & \cellcolor{gray!10}{0.121} & \cellcolor{gray!10}{0.107} & \cellcolor{gray!10}{1.132} & \cellcolor{gray!10}{0.261}\\
+precinct\_id18.033.18.19. & -0.002 & 0.101 & -0.024 & 0.981\\
+\cellcolor{gray!10}{precinct\_id21.126.21.179.} & \cellcolor{gray!10}{0.204} & \cellcolor{gray!10}{0.157} & \cellcolor{gray!10}{1.299} & \cellcolor{gray!10}{0.198}\\
+precinct\_id22.061.22.60. & 0.213 & 0.105 & 2.023 & 0.047\\
+\addlinespace
+\cellcolor{gray!10}{precinct\_id22.124.22.52.} & \cellcolor{gray!10}{0.156} & \cellcolor{gray!10}{0.103} & \cellcolor{gray!10}{1.509} & \cellcolor{gray!10}{0.135}\\
+precinct\_id22.137.22.193. & 0.179 & 0.104 & 1.721 & 0.089\\
+\cellcolor{gray!10}{precinct\_id22.158.22.203.} & \cellcolor{gray!10}{0.165} & \cellcolor{gray!10}{0.088} & \cellcolor{gray!10}{1.879} & \cellcolor{gray!10}{0.064}\\
+precinct\_id22.209.22.172. & 0.188 & 0.106 & 1.770 & 0.081\\
+\cellcolor{gray!10}{precinct\_id28.056.28.149.} & \cellcolor{gray!10}{-0.011} & \cellcolor{gray!10}{0.112} & \cellcolor{gray!10}{-0.099} & \cellcolor{gray!10}{0.921}\\
+\addlinespace
+precinct\_id28.072.28.98. & 0.097 & 0.104 & 0.934 & 0.353\\
+\cellcolor{gray!10}{precinct\_id28.139.28.145.} & \cellcolor{gray!10}{0.040} & \cellcolor{gray!10}{0.111} & \cellcolor{gray!10}{0.359} & \cellcolor{gray!10}{0.721}\\
+precinct\_id28.163.28.69. & 0.124 & 0.106 & 1.179 & 0.242\\
+\cellcolor{gray!10}{precinct\_id29.241.29.172.} & \cellcolor{gray!10}{0.067} & \cellcolor{gray!10}{0.089} & \cellcolor{gray!10}{0.749} & \cellcolor{gray!10}{0.456}\\
+precinct\_id34.050.34.39. & 0.342 & 0.089 & 3.821 & 0.000\\
+\addlinespace
+\cellcolor{gray!10}{precinct\_id34.151.34.125.} & \cellcolor{gray!10}{0.098} & \cellcolor{gray!10}{0.093} & \cellcolor{gray!10}{1.050} & \cellcolor{gray!10}{0.297}\\
+precinct\_id36.133.36.92. & 0.358 & 0.091 & 3.941 & 0.000\\
+\cellcolor{gray!10}{precinct\_id40.044.40.68.} & \cellcolor{gray!10}{0.236} & \cellcolor{gray!10}{0.096} & \cellcolor{gray!10}{2.457} & \cellcolor{gray!10}{0.016}\\
+precinct\_id40.098.40.120. & 0.195 & 0.092 & 2.123 & 0.037\\
+\cellcolor{gray!10}{precinct\_id40.134.40.174.} & \cellcolor{gray!10}{0.216} & \cellcolor{gray!10}{0.090} & \cellcolor{gray!10}{2.399} & \cellcolor{gray!10}{0.019}\\
+\addlinespace
+precinct\_id40.243.40.22. & 0.325 & 0.098 & 3.314 & 0.001\\
+\cellcolor{gray!10}{precinct\_id40.244.40.46.} & \cellcolor{gray!10}{0.178} & \cellcolor{gray!10}{0.095} & \cellcolor{gray!10}{1.873} & \cellcolor{gray!10}{0.065}\\
+precinct\_id55.228.55.180. & 0.130 & 0.092 & 1.406 & 0.164\\
+\cellcolor{gray!10}{precinct\_id58.162.58.98.} & \cellcolor{gray!10}{0.278} & \cellcolor{gray!10}{0.097} & \cellcolor{gray!10}{2.867} & \cellcolor{gray!10}{0.005}\\
+precinct\_id58.232.58.231. & 0.203 & 0.092 & 2.203 & 0.031\\
+\addlinespace
+\cellcolor{gray!10}{precinct\_id67.141.67.123.} & \cellcolor{gray!10}{0.022} & \cellcolor{gray!10}{0.115} & \cellcolor{gray!10}{0.189} & \cellcolor{gray!10}{0.850}\\
+precinct\_id69.073.69.35. & 0.070 & 0.104 & 0.677 & 0.500\\
+\cellcolor{gray!10}{precinct\_id70.081.70.44.} & \cellcolor{gray!10}{0.062} & \cellcolor{gray!10}{0.095} & \cellcolor{gray!10}{0.655} & \cellcolor{gray!10}{0.514}\\
+precinct\_id70.135.70.105. & 0.441 & 0.128 & 3.451 & 0.001\\
+\cellcolor{gray!10}{precinct\_id70.221.70.155.} & \cellcolor{gray!10}{0.247} & \cellcolor{gray!10}{0.111} & \cellcolor{gray!10}{2.217} & \cellcolor{gray!10}{0.030}\\
+\addlinespace
+precinct\_id73.248.73.180. & 0.187 & 0.108 & 1.720 & 0.089\\
+\cellcolor{gray!10}{precinct\_id73.251.73.180.} & \cellcolor{gray!10}{0.204} & \cellcolor{gray!10}{0.102} & \cellcolor{gray!10}{1.995} & \cellcolor{gray!10}{0.050}\\
+precinct\_id87.017.87.58. & 0.127 & 0.112 & 1.135 & 0.260\\
+\cellcolor{gray!10}{precinct\_id87.053.87.68.} & \cellcolor{gray!10}{0.214} & \cellcolor{gray!10}{0.150} & \cellcolor{gray!10}{1.428} & \cellcolor{gray!10}{0.157}\\
+precinct\_id87.213.87.24. & 0.033 & 0.087 & 0.375 & 0.709\\
+\addlinespace
+\cellcolor{gray!10}{precinct\_id98.009.98.12.} & \cellcolor{gray!10}{0.129} & \cellcolor{gray!10}{0.107} & \cellcolor{gray!10}{1.210} & \cellcolor{gray!10}{0.230}\\
+year2007 & -0.045 & 0.024 & -1.876 & 0.064\\
+\cellcolor{gray!10}{year2011} & \cellcolor{gray!10}{-0.131} & \cellcolor{gray!10}{0.036} & \cellcolor{gray!10}{-3.686} & \cellcolor{gray!10}{0.000}\\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}
+\item Standard errors: Robust, type = HC3
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+\textbf{3C.Q3:} Compare results of the model above to the findings from
+the fixed effects analysis in the Stokes (2015) study. Why might the
+results be similar or different?
+
+\emph{Response:} \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+The model above estimates the average effect of having a proposed wind
+turbine to be go down by 5.7\%. The findings from the fixed effects
+analysis, on the other hand, show this to be a decrease of about 4\%.
+Results could be different because I accounted for variance in standard
+error in my model and this caused large differences in this percentage.
+
+\textbf{3C.Q4:} In your own words, explain why it is advantageous from a
+causal inference perspective to include year and precinct fixed effects.
+Explain how between-level and within-level variance is relevant to the
+problem of omitted variable bias (OVB).
+
+\emph{Response (2-4 sentences):}
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+Including year and precinct fixed effects is advantageous because
+including year absorbs common shocks shared by all precincts in a given
+year. Including precinct fixed effects absorbs time-invariant
+differences across precincts. By focusing on within-level variance this
+model reduced OVB that could potentially happen if you failed to measure
+a confounding variable.
+
+\paragraph{\texorpdfstring{\textbf{3D.} Now using the full sample,
+estimate the treatment effect of wind turbine proposals on incumbent
+vote share. Use \texttt{feols()} from the \texttt{\{fixest\}} package to
+estimate the fixed
+effects.}{3D. Now using the full sample, estimate the treatment effect of wind turbine proposals on incumbent vote share. Use feols() from the \{fixest\} package to estimate the fixed effects.}}\label{d.-now-using-the-full-sample-estimate-the-treatment-effect-of-wind-turbine-proposals-on-incumbent-vote-share.-use-feols-from-the-fixest-package-to-estimate-the-fixed-effects.}
+
+See vignette here:
+\href{https://cran.r-project.org/web/packages/fixest/vignettes/fixest_walkthrough.html\#11_Estimation}{fixest
+walkthrough}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{model2\_ff }\OtherTok{\textless{}{-}} \FunctionTok{feols}\NormalTok{(}
+\NormalTok{  perc\_lib }\SpecialCharTok{\textasciitilde{}}\NormalTok{ proposed\_turbine }\SpecialCharTok{|}\NormalTok{ precinct\_id }\SpecialCharTok{+}\NormalTok{ year,}
+  \AttributeTok{data =}\NormalTok{ panel\_data, }
+  \AttributeTok{cluster =} \SpecialCharTok{\textasciitilde{}}\NormalTok{ precinct\_id}
+\NormalTok{)}
+
+\FunctionTok{summary}\NormalTok{(model2\_ff)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+OLS estimation, Dep. Var.: perc_lib
+Observations: 18,558
+Fixed-effects: precinct_id: 6,186,  year: 3
+Standard-errors: Clustered (precinct_id) 
+                 Estimate Std. Error  t value   Pr(>|t|)    
+proposed_turbine -0.04157   0.007682 -5.41144 6.4869e-08 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+RMSE: 0.070481     Adj. R2: 0.624835
+                 Within R2: 0.00224 
+\end{verbatim}
+
+\textbf{3D.Q1:} Interpret the model results and translate findings to be
+clear to an audience that may not have a background in causal inference
+(Econometrics) methods.
+
+In panel data settings, why is clustering by precinct important (i.e.,
+\texttt{cluster\ =\ \textasciitilde{}precinct\_id}) ?''
+
+\emph{Response (4-6 sentences):}
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+The model states that there is about a -4\% decrease in liberal voter
+shares within the same precinct over time when a wind turbine is
+proposed. This coefficient is statistically significant. This means
+there is evidence to support the notion that proposed wind turbines
+caused people in those precincts to punish incumbents by decreasing
+their share of liberal votes. Clustering is important because it
+addresses the fact that vote outcomes from one election might influence
+vote outcomes for that same precinct for future elections. Clustering
+ensures the model doesn't underestimate uncertainty.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{\texorpdfstring{\textbf{3E.} Estimate the treatment effect of
+\emph{operational wind turbines} on incumbent vote share. Use the same
+approach as the previous
+model.}{3E. Estimate the treatment effect of operational wind turbines on incumbent vote share. Use the same approach as the previous model.}}\label{e.-estimate-the-treatment-effect-of-operational-wind-turbines-on-incumbent-vote-share.-use-the-same-approach-as-the-previous-model.}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{model3\_ff }\OtherTok{\textless{}{-}} \FunctionTok{feols}\NormalTok{(}
+\NormalTok{  perc\_lib }\SpecialCharTok{\textasciitilde{}}\NormalTok{ operational\_turbine }\SpecialCharTok{|}\NormalTok{ precinct\_id }\SpecialCharTok{+}\NormalTok{ year,}
+  \AttributeTok{data =}\NormalTok{ panel\_data, }
+  \AttributeTok{cluster =} \SpecialCharTok{\textasciitilde{}}\NormalTok{ precinct\_id}
+\NormalTok{)}
+
+\FunctionTok{summary}\NormalTok{(model3\_ff)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+OLS estimation, Dep. Var.: perc_lib
+Observations: 18,558
+Fixed-effects: precinct_id: 6,186,  year: 3
+Standard-errors: Clustered (precinct_id) 
+                     Estimate Std. Error  t value   Pr(>|t|)    
+operational_turbine -0.092762   0.011739 -7.90195 3.2271e-15 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+RMSE: 0.070447     Adj. R2: 0.625198
+                 Within R2: 0.003206
+\end{verbatim}
+
+\textbf{3E.Q1:} Interpret the \texttt{model3\_ff} results as clearly and
+\textbf{concisely} as you can.
+
+\emph{Response:} \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+The model states that there is a statistically significant 9\% decrease
+in liberal voter shares within the same precinct over time when a wind
+turbine operates in their precinct. This provides evidence for people in
+precincts with operational wind turbines decreasing their share of
+liberal votes.
+
+\textbf{3E.Q2:} Why do you think the effect of proposed wind turbines is
+different from operational wind turbines. Develop your own theory about
+why incumbent vote share is affected in this way. Use the Stokes (2015)
+study to inform your response as needed.
+
+\emph{Response:} \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+I think the effect of operational wind turbines is greater than the
+effect of proposed wind turbines because people living near these wind
+turbines wont fell as impacted by hearing about proposed wind turbines
+as they will with physically seeing and dealing with them. Additionally,
+since developers didn't need local approval a lot of people living near
+these wind turbines might not have even known a wind turbine was getting
+built until they physically saw it - so they couldn't oppose it before.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+
+
+
+\end{document}

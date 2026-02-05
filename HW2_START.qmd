@@ -21,37 +21,37 @@ All written responses must be written independently (in your own words).
 
 Keep your work readable: Use clear headings and label plot elements thoughtfully.
 
-Assignment submission (YOUR NAME): ______________________________________
+Assignment submission : Richard Montes Lemus
 
 ------------------------------------------------------------------------
 
-### Introduction 
+### Introduction
 
 In this assignment you will be doing political weather forecasting except the “storms” we care about are electoral swings that might follow local wind turbine development.
 
 In Stokes (2015), the idea is that a policy with diffuse benefits (cleaner electricity) can create concentrated local costs (turbines nearby), and those local opponents may “send a signal” at the ballot box (i.e., NIMBYISM). Your job is to use two statistical tools:
 
-- Matching: Can we create a more apples-to-apples comparison between precincts that did vs. did not end up near turbine proposals?
-- Fixed effects + Difference-in-Differences: Can we use repeated elections to estimate how within-precinct changes in turbine exposure relate to changes in incumbent vote share?
+-   Matching: Can we create a more apples-to-apples comparison between precincts that did vs. did not end up near turbine proposals?
+-   Fixed effects + Difference-in-Differences: Can we use repeated elections to estimate how within-precinct changes in turbine exposure relate to changes in incumbent vote share?
 
 ------------------------------------------------------------------------
 
 ### Learning goal: Replicate the matching and fixed effects analyses from study:
 
-> Stokes (2015): *"Electoral Backlash against Climate Policy: A Natural Experiment on Retrospective Voting and Local Resistance to Public Policy*. 
+> Stokes (2015): *"Electoral Backlash against Climate Policy: A Natural Experiment on Retrospective Voting and Local Resistance to Public Policy*.
 
-- **Study:** [Stokes (2015) - Article](https://drive.google.com/file/d/1y2Okzjq2EA43AW5JzCvFS8ecLpeP6NKh/view?usp=sharing)
-- **Data source:** [Dataverse-Stokes2015](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/SDUGCC)
+-   **Study:** [Stokes (2015) - Article](https://drive.google.com/file/d/1y2Okzjq2EA43AW5JzCvFS8ecLpeP6NKh/view?usp=sharing)
+-   **Data source:** [Dataverse-Stokes2015](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/SDUGCC)
 
 ::: callout
-`NOTE:` Replication of study estimates will be approximate. An alternative matching procedure and fixed effects estimation package are utilized in this assignment for illustration purposes. 
+`NOTE:` Replication of study estimates will be approximate. An alternative matching procedure and fixed effects estimation package are utilized in this assignment for illustration purposes.
 :::
 
 ------------------------------------------------------------------------
 
-### Setup: Load libraries 
+### Setup: Load libraries
 
-0. Load libraries (+ install if needed)
+0.  Load libraries (+ install if needed)
 
 ```{r}
 
@@ -73,7 +73,7 @@ library(scales) # plotting
 
 ------------------------------------------------------------------------
 
-### Part 1: Study Background 
+### Part 1: Study Background
 
 #### **1A.** Dive into the details of the study design and evaluation plan
 
@@ -83,95 +83,155 @@ library(scales) # plotting
 `NOTE:` Read over study to inform your response to the assignment questions. For this assignment we will skip-over sections that describe the *Instrumental Variables* identification strategy. We will cover instrumental variable designs weeks 6-7.
 :::
 
-**1A.Q1** Summarize the environmental policy issue, the outcome of interest, and the intervention being evaluated. 
-Be sure to include a brief description of each of the following key elements of the study: unit of analysis, outcome, treatment, comparison group): 
+**1A.Q1** Summarize the environmental policy issue, the outcome of interest, and the intervention being evaluated. Be sure to include a brief description of each of the following key elements of the study: unit of analysis, outcome, treatment, comparison group):
 
-*Response:* _________________________
+*Response:* \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+Environmental Policy Issue:
+
+In 2009, the Liberal government in Ontario Canada passed the Green Energy Act. This allows private corporations to build clean wind energy infrastructure without needing approval from local communities. Although a majority of people in Ontario supported clean energy, there were concentrated costs for local communities close to these projects. These communities sent a signal of disapproval by causing the Liberal government to lose seats at the upcoming election. This caused the government to hold back from building these projects.
+
+Outcome of Interest:
+
+The outcome of interest is Liberal party vote share in provincial elections.
+
+Intervention Being Evaluated:
+
+The intervention being evaluated is placing or proposing wind turbine projects in or near precincts.
+
+Unit of Analysis:
+
+Electoral precincts in the Ontario
+
+Outcome treatment:
+
+Precincts with proposed or built wind turbines.
+
+Comparison group:
+
+Precincts without proposed or built wind turbines
 
 **1A.Q2** Why might turbine proposals be correlated with baseline political preferences or rural areas? Provide 2 plausible mechanisms, and explain why that creates confounding.
 
-*Response:* _________________________
+*Response:* \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+Since wind turbines could only be built in rural areas this causes a confound. People who live in rural areas tend to be more conservative and might already plan to vote against policies commonly associated with liberal parties. Therefore, loss of liberal party voter share may be due to pre-existing trends in these rural areas that were already becoming more anti-liberal in the first place. This decline in liberal votes may be wrongly attributed to the wind turbine project when it's actually a pre-existing political ideology trend.
+
+Another confound would be that when wealthy developers were thinking about where to place these wind turbines, they purposely avoided wealthy and politically active communities. They might have anticipated these communities would protest and slow down the development project and decided to instead choose lower income and less politically active communities. This may mean the disapproval expressed through voting against the Liberal Party might not be caused by the turbines themselves, but rather reflects pre-existing characteristics of communities that got turbines.
 
 ------------------------------------------------------------------------
 
 #### **1B.** Break down the causal inference strategy and identify threats to identification:
 
-**1B.Q1**  What is the key identifying assumption for a fixed effects / Difference-in-Difference design? Explain how this assumption when satisfied provides evidence of causal effect: 
+**1B.Q1** What is the key identifying assumption for a fixed effects / Difference-in-Difference design? Explain how this assumption when satisfied provides evidence of causal effect:
 
-*Response:* _________________________
+*Response:* \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
 
-**1B.Q2**  What is the reason for using a fixed effects approach from a causal inference perspective? Summarize within the context of study (in your own words).
+The key identifying assumption is that in the absence of treatment, the treated and control group would have experienced parallel trends over time. If both groups experienced the same trend in the absence of treatment, this indicated the treatment is responsible for the change in slope for the treated group and provides evidence of causal effect if the slope change is significant.
 
-*Response:* _________________________
+**1B.Q2** What is the reason for using a fixed effects approach from a causal inference perspective? Summarize within the context of study (in your own words).
+
+*Response:* \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+With a fixed effects approach we compare each precinct directly to itself over time and observe changes that same precinct experiences over time. This allows us to control for time-invariant differences that are bound to exists between different precincts in our study.
 
 **1B.Q3** What part of the SUTVA assumption is most likely violated in the context of this study design (and why)?
 
-*Response:* _________________________
+*Response:* \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
 
-**1B.Q4**  Why does spillover matter when estimating an unbiased treatment effect? 
+The SUTVA assumption requiring one unit's treatment to not affect the outcome of another unit is being violated. When a turbine is placed in one precinct it doesn't necessarily only affect that specific precinct. The fossil fuel job displacement caused by a wind turbine may affect many surrounding precinct workers since they are most likely spread out across various precincts. Furthermore, the mobilization efforts against wind turbines might not be contained to the precincts containing wind turbines, they may inspire allies from other precincts without wind turbines to vote in their favor.
 
-*Response:* _________________________
+**1B.Q4** Why does spillover matter when estimating an unbiased treatment effect?
+
+*Response:* \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+Spillover could cause the difference between between control and treated groups to seem smaller than they really are. This is because the control group could potentially vote similarly to the treatment group due to it being influenced by the treatment group - this could introduce bias.
 
 **1B.Q5** How do the authors assess the risk of spillovers, and what analytic choice do they make to attempt to mitigate the risk that spillover biases the causal estimate?
 
-*Response:* _________________________
+*Response:* \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+The authors assess the risk of spillover by testing for the statistical significance of the treatment for precincts within a 1km, 2km, 3km, 4km, and 5km radius from a wind turbine. They see a statistically significant voter decline in precincts that are 0-3km from the wind turbine and choose to assign precincts within a 3km buffer from a wind turbine to the treated group as opposed to just assigning precincts containing wind turbines to the treated group.
 
 ------------------------------------------------------------------------
 
-### Part 2: Matching 
+### Part 2: Matching
 
 ------------------------------------------------------------------------
 
-We will start by evaluating the 2007 survey (cross-sectional) data. Treatment is defined by whether a precinct is near a turbine proposal (within 3 km). 
+We will start by evaluating the 2007 survey (cross-sectional) data. Treatment is defined by whether a precinct is near a turbine proposal (within 3 km).
 
 > Goal: Match precincts using pre-treatment covariates and then estimate the effect of proposed wind turbines on incumbent vote share.
 
 #### **2A.** Load data for matching
 
-1. Read in data file `stokes15_survey2007.csv`
-2. Code `precinct_id` and `district_id` as factors
-3. Take a look at the data
+1.  Read in data file `stokes15_survey2007.csv`
+2.  Code `precinct_id` and `district_id` as factors
+3.  Take a look at the data
 
 ```{r}
 
-match_data <- 
+match_data <- read_csv(here("data", "stokes15_survey2007.csv")) %>% 
+    mutate(precinct_id = as.factor(precinct_id),
+           district_id = as.factor(district_id))
     
 ```
 
+**2A.Q1** Intuition check: **Why match?** Explain rationale for using this method.
 
-**2A.Q1** Intuition check: **Why match?** Explain rationale for using this method. 
+*Response:* \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
 
-*Response:* _________________________
+We should match so that we make sure our treated precinct's counter factual is as similar as possible for pre-treatment variables. This makes sure the difference we see between affected and unaffected precincts is due to the wind turbine construction and not some pre-existing differences in variables between them.
 
 ------------------------------------------------------------------------
 
 #### **2B.** Check imbalance (before matching)
 
-- Create a covariate *balance table* comparing treated and control precincts 
-- Treatment indicator: `proposed_turbine_3km`
-- Include pre-treatment covariates: `log_home_val_07`, `p_uni_degree`, `log_median_inc`, `log_pop_denc` 
-- Use the `tbl_summary()` function from the `{gtsummary}` package.
+-   Create a covariate *balance table* comparing treated and control precincts
+-   Treatment indicator: `proposed_turbine_3km`
+-   Include pre-treatment covariates: `log_home_val_07`, `p_uni_degree`, `log_median_inc`, `log_pop_denc`
+-   Use the `tbl_summary()` function from the `{gtsummary}` package.
 
 ```{r}
 
 match_data %>%
+  select(
+    proposed_turbine_3km, 
+    log_home_val_07,
+    p_uni_degree,
+    log_median_inc,
+    log_pop_denc) %>%
+  tbl_summary(
+    by = proposed_turbine_3km,
+    statistic = list(
+      all_continuous() ~ "{mean} ({sd})",
+      all_categorical() ~ "{n} ({p}%)"
+    )
+  ) %>%
+  modify_header(label ~ "**Covariate**") %>%
+  modify_spanning_header(c("stat_1", "stat_2") ~ "**Near Turbine**")
 
 ```
 
-
 **2B.Q1** Summarize the table output: Which covariates look balanced/imbalanced?
 
-*Response:* _________________________
+*Response:* \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
 
-**2B.Q2** Describe in your own words why these covariates might be expected to confound the treatment estimate: 
+For my control and treatment groups, the log_home_val_07 and log_median_inc variables seem to be pretty balanced, the p_uni_degree variable difference is moderate, and the log_pop_denc variable is severely unbalanced.
 
-*Response (2-4 sentences):* _________________________
+**2B.Q2** Describe in your own words why these covariates might be expected to confound the treatment estimate:
+
+*Response (2-4 sentences):* \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+The proportion with university degrees (`p_uni_degree`) and population density (`log_pop_denc`) could both confound the treatment estimate because they're associated with political preferences. Precincts with higher proportions of university graduates tend to vote more liberal, while rural precincts with a lower population density tend to vote less liberal. This could mean the differences we see between our control and treatment group is due to these pre-existing differences and not necessarily wind turbines.
 
 ------------------------------------------------------------------------
 
-**2B.Q3** Intuition check: What type of data do you need to conduct a matching analysis? 
+**2B.Q3** Intuition check: What type of data do you need to conduct a matching analysis?
 
-*Response:* _________________________
+*Response:* \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+You need to have a lot of pre-treatment covariates and a lot of control data relative to treated data.
 
 ------------------------------------------------------------------------
 
@@ -179,29 +239,31 @@ match_data %>%
 
 📜 [Documentation - MatchIt](https://kosukeimai.github.io/MatchIt/)
 
-Learning goals: 
+Learning goals:
 
-- Approximate the Mahalanobis matching method used in Stokes (2015)
-- Implement another common matching approach called `propensity score matching`
+-   Approximate the Mahalanobis matching method used in Stokes (2015)
+-   Implement another common matching approach called `propensity score matching`
 
 ::: callout
-`NOTE`: In the replication code associated with Stokes (2015) the {`AER`} package is used for Mahalanobis matching. In this assignment we use the {`MatchIt`} package. The results are comparable but will not be exactly the same. 
+`NOTE`: In the replication code associated with Stokes (2015) the {`AER`} package is used for Mahalanobis matching. In this assignment we use the {`MatchIt`} package. The results are comparable but will not be exactly the same.
 :::
 
 ------------------------------------------------------------------------
 
-### 2C. Mahalanobis nearest-neighbor matching 
+### 2C. Mahalanobis nearest-neighbor matching
 
-- Conduct Mahalanobis matching  
-- Use nearest-neighbor match without replacement using Mahalanobis distance
-- Use 1-to-1 matching (match one control unit to each treatment unit)
-- Extract the matched data using `match.data()`
+-   Conduct Mahalanobis matching\
+-   Use nearest-neighbor match without replacement using Mahalanobis distance
+-   Use 1-to-1 matching (match one control unit to each treatment unit)
+-   Extract the matched data using `match.data()`
 
 ```{r}
 set.seed(2412026)
 
-match_model <- matchit(
-     # Treatment_indicator ~  Pre_treatment_covariates
+match_model <- matchit(proposed_turbine_3km ~ log_home_val_07 + 
+    p_uni_degree +
+    log_median_inc +
+    log_pop_denc,
   data = match_data, 
   method = "nearest",       # Nearest neighbor matching
   distance = "mahalanobis", # Mahalanobis distance
@@ -218,25 +280,34 @@ matched_data <- match.data(match_model)
 summary(match_model)
 ```
 
-**2C.Q1** Using the `summary()` output: Which covariate had the largest and smallest `Std. Mean Diff.` before matching. Next, compare largest/smallest `Std. Mean Diff.` after matching. 
+**2C.Q1** Using the `summary()` output: Which covariate had the largest and smallest `Std. Mean Diff.` before matching. Next, compare largest/smallest `Std. Mean Diff.` after matching.
 
-*Response:* _________________________
-
+*Response:* \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
 
 ------------------------------------------------------------------------
+
+Largest Std. Meal Diff Before Matching
+
+-   log_pop_denc
+
+Smallest Std. Meal Diff Before Matching
+
+-   log_median_inc
+
+After matching log_pop_denc still has the largest Std but it is much smaller (-0.8897 vs -0.0329). log_median_inc still has the smallest Std but is even smaller (-0.0636 vs 0.0002) - we now see a near perfect match for this variable.
 
 #### 2D. Create a "love plot" using `love.plot()` ❤️
 
 📜 [Documentation - cobalt](https://ngreifer.github.io/cobalt/)
 
-- Plot mean differences for data before & after matching across all pre-treatment covariates
-- This is an effective way to evaluate how effective matching was at achieving balance.
+-   Plot mean differences for data before & after matching across all pre-treatment covariates
+-   This is an effective way to evaluate how effective matching was at achieving balance.
 
------------------------------------------------------------------------
+------------------------------------------------------------------------
 
-- Make a love plot of standardized mean differences (SMDs) before vs after matching.
-- Include a threshold line at 0.1. 
-- In love plot display `mean.diffs`  
+-   Make a love plot of standardized mean differences (SMDs) before vs after matching.
+-   Include a threshold line at 0.1.
+-   In love plot display `mean.diffs`
 
 ```{r}
 
@@ -254,24 +325,35 @@ love.plot(match_model, stats = "mean.diffs",
 
 **2D.Q1** Interpret the love plot in your own words:
 
-*Response:* _________________________
+*Response:* \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+The love plot shows the standardized mean differences between the control and treatment of our covariates decreased significantly after we matched treatments to their closest counterfactual.
 
 ------------------------------------------------------------------------
 
-### Propensity score matching 
+### Propensity score matching
 
 ------------------------------------------------------------------------
 
-#### 2E. Propensity Score Matching (PSM) 
+#### 2E. Propensity Score Matching (PSM)
 
- - Estimate 1:1 nearest-neighbor Propensity Score Matching 
- - Same code as above except change `distance = "logit"`  
- 
+-   Estimate 1:1 nearest-neighbor Propensity Score Matching
+-   Same code as above except change `distance = "logit"`
+
 ```{r}
 
 set.seed(2412026)
 
-propensity_scores <- 
+propensity_scores <- matchit(proposed_turbine_3km ~ log_home_val_07 + 
+    p_uni_degree +
+    log_median_inc +
+    log_pop_denc,
+  data = match_data, 
+  method = "nearest",       # Nearest neighbor matching
+  distance = "logit",       # logit distance
+  ratio = 1,                # Match one control unit to one treatment unit (1:1 matching)
+  replace = FALSE           # Control observations are not replaced
+)
     
 ```
 
@@ -286,13 +368,16 @@ Use `bal.tab()` to report balance before and after matching.
 ```{r}
 
 bal.tab(propensity_scores, 
+        un = TRUE,
         var.names = new_names) 
 
 ```
 
 **2E.Q1** Compare Mahalanobis vs propensity score matching. Which method did a better job at achieving balance?
 
-*Response:* _________________________
+*Response:* \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+Mahalanobis had a smaller standard mean difference across all covariates. Because of this, Mahalanobis did a better job at achieving balance.
 
 ------------------------------------------------------------------------
 
@@ -301,23 +386,31 @@ bal.tab(propensity_scores,
 Using the matched data (Mahalanobis method), estimate the effect of treatment on the change in incumbent vote share (`change_liberal`).
 
 ```{r}
+    
+reg_match <- lm(change_liberal ~ proposed_turbine_3km,
+                    data = matched_data,
+                    weights = weights)
 
-reg_match <- 
-
-#summ(, model.fit = FALSE)
+summ(reg_match, model.fit = FALSE)
 ```
 
-**2F.Q1** Have you identified a causal estimate using this approach: Why or why not? 
+**2F.Q1** Have you identified a causal estimate using this approach: Why or why not?
 
-*Response:* _________________________
+*Response:* \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+Assumption that I have balanced relevant confounding variables, I have found a causal estimate using this approach. Since I matched treatment groups to their closest control match, this minimized group differences that are not due to proximity to wind turbines. This isolated the effect of proximity to wind turbines. The coefficient for this variable was found to be statistically significant coefficient, suggesting proximity to turbines is associated with a 6% decline in Liberal vote share.
 
 **2F.Q2** When using a matching method, what is the main threat to causal identification?
 
-*Response:* _________________________
+*Response:* \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+The main threat is that matching alone does not address potential selection bias coming from variables that were not observed.
 
 **2F.Q3** Describe why the treatment estimate represents the `Average Treatment for the Treated (ATT)` and explain why this is the case relative to estimation of the `Average Treatment Effect (ATE)`.
 
-*Response:* _________________________
+*Response:* \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+It represents the ATT because the treatment estimate comes from the effect of the treatment on the 354 treated precincts relative to the matched 354 control precincts - not the full sample of over 5,000 control precincts. This means we're only estimating the effect of turbines on precincts for 354 matched groups. If we had estimated the effect of this treatment on all the precinct in our model this would have given us ATE.
 
 ------------------------------------------------------------------------
 
@@ -327,30 +420,38 @@ reg_match <-
 
 ------------------------------------------------------------------------
 
-#### **3A:** Read in the panel data + code variables `precinct_id` and `year` as factors 
+#### **3A:** Read in the panel data + code variables `precinct_id` and `year` as factors
 
 ```{r}
 
-panel_data <- 
+panel_data <- read_csv(here("data", "Stokes15_panel_data.csv")) %>% 
+    mutate(precinct_id = as.factor(precinct_id),
+           year = as.factor(year))
 
 # HINT: Try running `tabyl(panel_data$year)`. Review article to make sense of the row numbers (n).
+
+tabyl(panel_data$year)
 
 ```
 
 **3A.Q1:** Why are there 18,558 rows in `panel_data`?
 
-*Response:* _________________________
+*Response:* \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+There were 18,558 rows in panel_data because there are 6186 precincts and this data is collected once a year across three years. 18,558 is simply the result of 6186 three times.
 
 ```{r}
 # How many years are included in the panel?
 
-# How many precincts are there?
+# How many precincts are there? 
 
 ```
 
 **3A.Q2:** How many unique precincts are *ever treated* (i.e., `proposed` & `operational`)?
 
-*Response:* _________________________
+*Response:* \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+There are 184 unique precincts ever treated in the proposed category and 52 unique precincts ever treated in the operational category.
 
 ```{r}
 
@@ -370,11 +471,12 @@ panel_data %>%
 
 #### **3B.** Plot and evaluate parallel trends: Replicate `Figure.2` (Stokes, 2015)
 
-1. Create indicators for whether each precinct is ever treated by 2011 (`treat_p`, `treat_o`; separate indicator for proposals and operational turbines).
-2. Plot mean incumbent vote share by year for treated vs control precincts (with 95% CIs). 
-3. Facet by turbine type (proposed & operational)
+1.  Create indicators for whether each precinct is ever treated by 2011 (`treat_p`, `treat_o`; separate indicator for proposals and operational turbines).
+2.  Plot mean incumbent vote share by year for treated vs control precincts (with 95% CIs).
+3.  Facet by turbine type (proposed & operational)
 
-Step 1: Prepare data 
+Step 1: Prepare data
+
 ```{r}
 
 trends_data <- panel_data %>%
@@ -394,7 +496,8 @@ trends_data <- panel_data %>%
 
 ```
 
-Step 2: Create trends plot 
+Step 2: Create trends plot
+
 ```{r}
 
 pd <- position_dodge(width = 0.15)
@@ -432,9 +535,11 @@ ggplot(aes(year, mean, color = status, group = status)) +
 
 **3B.Q1:** Write a short paragraph assessing the parallel trends assumption for each outcome.
 
-*Response (4-6 sentences):* _________________________
+*Response (4-6 sentences):* \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
 
 ------------------------------------------------------------------------
+
+For the proposed turbines group, the parallel trends assumption seems well satisfied. The pre-treatment period for the control and treatment groups seem to match up well and the treated group seems to experience a decline following the introduction of the turbine proposal. For the operational turbines group, the parallel trends assumption is not satisfied as well. During the pre-treatment period for the control and treatment groups, it seems that the treated group starts at a higher initial liberal party vote share than the control group. Regardless, we also see a decline following the introduction of the turbine proposal for operational turbine precincts.
 
 ### Estimating Fixed Effects Models (DiD) for proposals
 
@@ -447,17 +552,17 @@ $$
 + \varepsilon_{it}
 $$
 
-- $Y_{it}$ is the vote share for the Liberal Party in precinct *i* in time *t*
-- $\beta$ is the treatment effect of a turbine being proposed within a precinct
-- $\gamma_i$ is the precinct fixed effect
-- $\delta_t$ is the year fixed effect
+-   $Y_{it}$ is the vote share for the Liberal Party in precinct *i* in time *t*
+-   $\beta$ is the treatment effect of a turbine being proposed within a precinct
+-   $\gamma_i$ is the precinct fixed effect
+-   $\delta_t$ is the year fixed effect
 
 ------------------------------------------------------------------------
 
 ### Example 1: Randomly sample 40 precincts
 
-- To illustrate the "dummy variable method" of estimating fixed effects using the the general `lm()` function we are going to randomly sample 40 precincts (20 "treated" precincts with proposed turbines). 
-- If we attempted to use this approach with the full sample estimating all 6185 (n-1) precinct-level coefficients is impractical (it would take a long time).
+-   To illustrate the "dummy variable method" of estimating fixed effects using the the general `lm()` function we are going to randomly sample 40 precincts (20 "treated" precincts with proposed turbines).
+-   If we attempted to use this approach with the full sample estimating all 6185 (n-1) precinct-level coefficients is impractical (it would take a long time).
 
 ```{r}
 set.seed(40002026)
@@ -485,34 +590,48 @@ sample_40_precincts <- panel_data %>%
 #### **3C:** Estimate a fixed effects model using `lm()` with fixed effects added for `precinct` and `year` using the sample of 40 precincts just created.
 
 ```{r}
-model1_ff <- 
+model1_ff <- lm(perc_lib ~ proposed_turbine + 
+                   precinct_id + 
+                   year,
+                data = sample_40_precincts)
 
-# summ(*** , model.fit = FALSE)
 ```
 
 ```{r}
-# summ(*** , model.fit = FALSE, [. . .])
+summ(model1_ff , model.fit = FALSE, digits = 3)
 ```
 
 **3C.Q1:** Intuition check: Is the *signal-to-noise* ratio for the treatment estimate greater than *2-to-1*?
 
-*Response:* _________________________
+*Response:* \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
 
 > HINT: Add the argument `digits = 3` to the `summ()` function above
+>
+> No, the signal-to-noise ratio for the treatment estimate is not greater than 2 - 1. It is not significant.
 
-**3C.Q2:** Re-run the `summ()` function using the *heteroscedasticiy robust standard error adjustment* (`robust = TRUE`). Did the standard error (S.E.) estimates change? Explain why. 
+**3C.Q2:** Re-run the `summ()` function using the *heteroscedasticiy robust standard error adjustment* (`robust = TRUE`). Did the standard error (S.E.) estimates change? Explain why.
 
-*Response:* _________________________
+*Response:* \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
 
-**3C.Q3:** Compare results of the model above to the findings from the fixed effects analysis in the Stokes (2015) study. Why might the results be similar or different? 
+Yes the standard error became larger. This is because using the *heteroscedasticiy robust standard error adjustment* allows for variance in the standard error across observations. This causes more variation in standard errors than the previous calculation which assumed a constant variance.
 
-*Response:* _________________________
+```{r}
+summ(model1_ff , model.fit = FALSE, digits = 3, robust = TRUE)
+```
 
-**3C.Q4:** In your own words, explain why it is advantageous from a causal inference perspective to include year and precinct fixed effects. Explain how between-level and within-level variance is relevant to the problem of omitted variable bias (OVB). 
+**3C.Q3:** Compare results of the model above to the findings from the fixed effects analysis in the Stokes (2015) study. Why might the results be similar or different?
 
-*Response (2-4 sentences):* _________________________
+*Response:* \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+The model above estimates the average effect of having a proposed wind turbine to be go down by 5.7%. The findings from the fixed effects analysis, on the other hand, show this to be a decrease of about 4%. Results could be different because I accounted for variance in standard error in my model and this caused large differences in this percentage.
+
+**3C.Q4:** In your own words, explain why it is advantageous from a causal inference perspective to include year and precinct fixed effects. Explain how between-level and within-level variance is relevant to the problem of omitted variable bias (OVB).
+
+*Response (2-4 sentences):* \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
 
 ------------------------------------------------------------------------
+
+Including year and precinct fixed effects is advantageous because including year absorbs common shocks shared by all precincts in a given year. Including precinct fixed effects absorbs time-invariant differences across precincts. By focusing on within-level variance this model reduced OVB that could potentially happen if you failed to measure a confounding variable.
 
 #### **3D.** Now using the full sample, estimate the treatment effect of wind turbine proposals on incumbent vote share. Use `feols()` from the `{fixest}` package to estimate the fixed effects.
 
@@ -520,16 +639,22 @@ See vignette here: [fixest walkthrough](https://cran.r-project.org/web/packages/
 
 ```{r}
 
-model2_ff <- 
+model2_ff <- feols(
+  perc_lib ~ proposed_turbine | precinct_id + year,
+  data = panel_data, 
+  cluster = ~ precinct_id
+)
 
-summary()
+summary(model2_ff)
 ```
 
 **3D.Q1:** Interpret the model results and translate findings to be clear to an audience that may not have a background in causal inference (Econometrics) methods.
 
 In panel data settings, why is clustering by precinct important (i.e., `cluster = ~precinct_id`) ?”
 
-*Response (4-6 sentences):* _________________________
+*Response (4-6 sentences):* \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+The model states that there is about a -4% decrease in liberal voter shares near a proposed wind turbine. This coefficient is statistically significant. This means there is evidence to support the notion that proposed wind turbines caused people in those precincts to punish incumbents by decreasing their share of liberal votes. Clustering is important because it addresses the fact that vote outcomes from one election might influence vote outcomes for that same precinct for future elections. Clustering ensures the model doesn't underestimate uncertainty.
 
 ------------------------------------------------------------------------
 
@@ -537,20 +662,26 @@ In panel data settings, why is clustering by precinct important (i.e., `cluster 
 
 ```{r}
 
-model3_ff <- 
+model3_ff <- feols(
+  perc_lib ~ operational_turbine | precinct_id + year,
+  data = panel_data, 
+  cluster = ~ precinct_id
+)
 
-summary()
+summary(model3_ff)
 ```
-
 
 **3E.Q1:** Interpret the `model3_ff` results as clearly and **concisely** as you can.
 
-*Response:* _________________________
+*Response:* \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
 
-**3E.Q2:** Why do you think the effect of proposed wind turbines is different from operational wind turbines. Develop your own theory about why incumbent vote share is affected in this way. Use the Stokes (2015) study to inform your response as needed. 
+The model states that there is a statistically significant 9% decrease in liberal voter shares within the same precinct over time when a wind turbine operates in their precinct. This provides evidence for people in precincts near operational wind turbines decreasing their share of liberal votes.
 
-*Response:* _________________________
+**3E.Q2:** Why do you think the effect of proposed wind turbines is different from operational wind turbines. Develop your own theory about why incumbent vote share is affected in this way. Use the Stokes (2015) study to inform your response as needed.
 
+*Response:* \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+I think the effect of operational wind turbines is greater than the effect of proposed wind turbines because people living near these wind turbines wont fell as impacted by hearing about proposed wind turbines as they will with physically seeing and dealing with them. Additionally, since developers didn't need local approval a lot of people living near these wind turbines might not have even known a wind turbine was getting built until they physically saw it - so they couldn't oppose it before.
 
 ------------------------------------------------------------------------
 
@@ -562,6 +693,3 @@ praise("${EXCLAMATION}! 🚀 Great work - You are ${adjective}! 💫")
 
 say("The End", "duck")
 ```
-
-
-
